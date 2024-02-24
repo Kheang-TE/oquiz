@@ -1,0 +1,15 @@
+.bg-primary a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.pagination{
+  display: inline-flex;
+}
+
+label.true{
+  color:green;
+}
+label.false{
+  color:red;
+}

@@ -1,0 +1,49 @@
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+
+  <h1 class="text-center m-2"><%= quiz.title %></h1>
+
+  <h2 class="text-center m-2"><%= quiz.description %></h1>
+
+  <h2 class="small text-end"><a href="/author/<%- quiz.author.id %>"><%= quiz.author.firstname %> <%= quiz.author.lastname.toUpperCase() %></a></h2>
+
+  <h2 class="small text-end">Date de création : <%= quiz.date %></h2>
+
+  <h2 class="text-end">Score : <%= player.score %> / <%= quiz.questions.length %></h2>
+
+  <h3>Thèmes</h3>
+  <ul class="mb-4 p-0">
+    <% quiz.tags.forEach(tag => { %>
+      <li class="badge bg-primary"><a href="/tag/<%- tag.id %>"><%= tag.name %></a></li>
+    <% }) %>
+  </ul>
+
+  <h3>Questions</h3>
+
+    <% quiz.questions.forEach(question => { %>
+      <span class="badge bg-info"><%= question.level.name %></span>
+      <p class="fw-bold mb-1"><%= question.description %></p>
+      <div class="mb-3 ms-2">
+        <% for(const key in player) { %>
+          <% for(const proposition of question.propositions) { %>
+            <% if(key == proposition.question_id){ %>
+              <div>
+                <% if(player[key][0] === proposition.id){ %>
+                  <input type="radio" id="<%- proposition.id %>" name="<%- proposition.question_id %>" value="<%- proposition.id %>" disabled checked>
+                  <label for="<%- proposition.id %>" class="<%- player[key][1] %>"><%= proposition.description %></label>
+                <% } else{ %>
+                  <input type="radio" id="<%- proposition.id %>" name="<%- proposition.question_id %>" value="<%- proposition.id %>" disabled >
+                  <label for="<%- proposition.id %>"><%= proposition.description %></label>
+                <% } %>
+              </div>
+            <% } %>
+          <% } %>
+        <% } %>
+      </div>
+      <p class="fst-italic text-secondary"><%= question.anecdote %></p>
+    <% }) %>
+
+</main>
+
+<%- include('./partials/footer') %>

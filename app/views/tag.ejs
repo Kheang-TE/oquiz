@@ -1,0 +1,23 @@
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+
+  <h1>Thème : <%= tag.name %></h1>
+
+  <div>
+    <h3>Liste de quiz</h3>
+    <% if(tag.quizzes){ %>
+      <ul>
+        <% for(const quiz of tag.quizzes) { %>
+        <li><a href="/quiz/<%- quiz.id %>"><%= quiz.title %></a></li>
+        <% } %>
+      </ul>
+    <% } else{ %>
+      <p class="ms-2">Aucun quizz dans cette catégorie pour le moment....</p>
+    <% } %>
+
+  </div>
+
+</main>
+
+<%- include('./partials/footer') %>

@@ -1,0 +1,35 @@
+<% if(!locals.user){ %>
+  <script>
+    window.location.replace('/404');
+  </script>
+<% } else{ %>
+
+  <%- include('./partials/header') %>
+
+  <main class="container py-4">
+    <h1 class="my-3">Profil sur O'quiz</h1>
+
+    <label class="form-label h4" for="firstname">Prénom</label>
+    <input class="form-control mb-4" type="text" disabled id="firstname" value="<%- locals.user.firstname %>">
+
+    <label class="form-label h4" for="lastname">Nom</label>
+    <input class="form-control mb-4" type="text" disabled id="lastname" value="<%- locals.user.lastname %>">
+
+    <label class="form-label h4" for="email">Email</label>
+    <input class="form-control mb-4" type="text" disabled id="email" value="<%- locals.user.email %>">
+
+    <hr>
+
+    <h2 class="my-3">Tous mes quiz</h2>
+    <% if(locals.user.quizzes){ %>
+      <ul>
+      <% for(const quiz of locals.user.quizzes){ %>
+        <li><a href="/quiz/<%- quiz.id %>"><%= quiz.title %></a></li>
+      <% } %>
+      </ul>
+    <% } %>
+
+  </main>
+
+  <%- include('./partials/footer') %>
+<% } %>
